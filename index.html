@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pankaj Khandelwal — Filmmaker | Delhi NCR</title>
+<meta name="description" content="Pankaj Khandelwal — engineer turned filmmaker. Wedding films, car delivery shoots, cinematic reels and commercial video in Delhi NCR.">
+<style>
+:root{
+  --bg:#ffffff;
+  --bg-alt:#f5f5f7;
+  --ink:#1d1d1f;
+  --gray:#6e6e73;
+  --blue:#0066cc;
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:17px;
+  line-height:1.47;
+  -webkit-font-smoothing:antialiased;
+  letter-spacing:-.01em;
+}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+
+/* ---------- NAV ---------- */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:48px;max-width:980px}
+.logo{font-weight:600;font-size:.95rem;color:var(--ink)}
+.logo:hover{text-decoration:none}
+.navlinks{display:flex;gap:28px}
+.navlinks a{color:var(--ink);font-size:.78rem;opacity:.8;transition:opacity .2s}
+.navlinks a:hover{opacity:1;text-decoration:none}
+
+/* ---------- HERO ---------- */
+.hero{text-align:center;padding:110px 22px 90px}
+.hero h1{
+  font-size:clamp(2.8rem,7vw,4.6rem);
+  font-weight:700;
+  letter-spacing:-.025em;
+  line-height:1.05;
+}
+.hero .sub{
+  font-size:clamp(1.2rem,2.6vw,1.65rem);
+  color:var(--gray);
+  font-weight:400;
+  margin-top:14px;
+  letter-spacing:-.015em;
+}
+.hero-links{margin-top:26px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.hero-links a{font-size:1.05rem}
+.hero-links a::after{content:" ›"}
+
+/* ---------- SECTION BASICS ---------- */
+section{padding:90px 0}
+.section-head{text-align:center;margin-bottom:50px}
+.section-head h2{
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:700;letter-spacing:-.02em;line-height:1.08;
+}
+.section-head p{color:var(--gray);font-size:1.2rem;margin-top:10px;letter-spacing:-.01em}
+
+/* ---------- WORK CARDS ---------- */
+.bg-alt{background:var(--bg-alt)}
+.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{
+  background:#fff;border-radius:var(--radius);overflow:hidden;
+  box-shadow:0 1px 2px rgba(0,0,0,.04);
+  transition:transform .3s cubic-bezier(.2,.6,.2,1),box-shadow .3s;
+  display:block;color:var(--ink);
+}
+.card:hover{transform:scale(1.015);box-shadow:0 12px 32px rgba(0,0,0,.10);text-decoration:none}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#e8e8ed}
+.card .fallback{
+  width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
+  background:#e8e8ed;color:var(--gray);font-size:.8rem;
+}
+.card-body{padding:22px 24px 26px;text-align:center}
+.card-cat{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--gray)}
+.card-title{font-size:1.3rem;font-weight:700;margin-top:4px;letter-spacing:-.015em}
+.card-note{color:var(--gray);font-size:.92rem;margin-top:4px}
+.card-link{display:inline-block;margin-top:10px;font-size:.95rem;color:var(--blue)}
+.card-link::after{content:" ›"}
+
+/* ---------- GALLERY ---------- */
+.gallery{columns:3;column-gap:16px}
+.gallery figure{break-inside:avoid;margin-bottom:16px;border-radius:var(--radius);overflow:hidden;background:#e8e8ed}
+.gallery img{width:100%;display:block;transition:transform .4s cubic-bezier(.2,.6,.2,1)}
+.gallery figure:hover img{transform:scale(1.04)}
+.ph{display:flex;align-items:center;justify-content:center;color:var(--gray);font-size:.75rem;text-align:center;padding:10px}
+.gallery-note{text-align:center;color:var(--gray);font-size:.85rem;margin-top:26px}
+.gallery-note code{background:#e8e8ed;padding:2px 7px;border-radius:6px;font-size:.8rem}
+
+/* ---------- DARK PRO SECTION ---------- */
+.pro{background:#000;color:#f5f5f7}
+.pro .section-head h2{color:#f5f5f7}
+.pro .section-head h2 em{
+  font-style:normal;
+  background:linear-gradient(90deg,#a78bfa,#60a5fa,#34d399);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.pro .section-head p{color:#86868b}
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:0 auto}
+.spec{
+  background:#161617;border-radius:var(--radius);padding:28px 24px;text-align:center;
+}
+.spec h3{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+.spec p{color:#86868b;font-size:.85rem;margin-top:6px}
+
+/* ---------- STORY ---------- */
+.story{max-width:680px;margin:0 auto;text-align:center}
+.story p{font-size:1.25rem;color:var(--gray);letter-spacing:-.012em;line-height:1.55;margin-bottom:22px}
+.story p strong{color:var(--ink);font-weight:600}
+
+/* ---------- SERVICES ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.svc{background:#fff;border-radius:var(--radius);padding:34px 30px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.svc h3{font-size:1.25rem;font-weight:700;letter-spacing:-.015em}
+.svc p{color:var(--gray);font-size:.95rem;margin-top:8px}
+
+/* ---------- CONTACT ---------- */
+.contact{text-align:center}
+.contact h2{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;letter-spacing:-.02em}
+.contact p{color:var(--gray);font-size:1.2rem;margin-top:10px}
+.cta-row{margin-top:30px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:13px 28px;border-radius:980px;
+  font-size:1rem;font-weight:500;transition:all .2s;
+}
+.btn-solid{background:var(--blue);color:#fff}
+.btn-solid:hover{background:#0055ab;text-decoration:none}
+.btn-ghost{color:var(--blue);border:1px solid var(--blue)}
+.btn-ghost:hover{background:rgba(0,102,204,.06);text-decoration:none}
+
+footer{padding:36px 0 50px;border-top:1px solid rgba(0,0,0,.08)}
+footer p{text-align:center;color:var(--gray);font-size:.78rem}
+
+/* ---------- REVEAL ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .card,.gallery img{transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:760px){
+  .work-grid{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:1fr}
+  .spec-grid{grid-template-columns:1fr 1fr}
+  .gallery{columns:2}
+  .navlinks{gap:18px}
+  .navlinks a:nth-child(n+4){display:none}
+  .hero{padding:80px 22px 64px}
+  section{padding:64px 0}
+}
+@media (max-width:480px){
+  .spec-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">Pankaj Khandelwal</a>
+    <div class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#photos">Photos</a>
+      <a href="#story">Story</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <h1>Filmmaker.<br>Engineered differently.</h1>
+  <p class="sub">Wedding films, car deliveries and cinematic stories.<br>Made in Delhi NCR.</p>
+  <div class="hero-links">
+    <a href="#work">Watch the work</a>
+    <a href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">Follow on Instagram</a>
+  </div>
+</header>
+
+<section class="bg-alt" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The work.</h2>
+      <p>Every frame, intentional.</p>
+    </div>
+    <div class="work-grid">
+      <!-- Replace href with your actual reel / YouTube links -->
+      <a class="card reveal" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
+        <img src="photos/work-1.jpg" alt="Wedding film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-1.jpg</div>'">
+        <div class="card-body">
+          <div class="card-cat">Wedding Film</div>
+          <div class="card-title">Cinematic Weddings</div>
+          <div class="card-note">Full-day candid and cinematic coverage.</div>
+          <span class="card-link">Watch the film</span>
+        </div>
+      </a>
+      <a class="card reveal" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
+        <img src="photos/work-2.jpg" alt="Car delivery film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-2.jpg</div>'">
+        <div class="card-body">
+          <div class="card-cat">Car Delivery</div>
+          <div class="card-title">Delivery Day Films</div>
+          <div class="card-note">From showroom handover to first drive.</div>
+          <span class="card-link">Watch the film</span>
+        </div>
+      </a>
+      <a class="card reveal" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
+        <img src="photos/work-3.jpg" alt="Pre-wedding film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-3.jpg</div>'">
+        <div class="card-body">
+          <div class="card-cat">Pre-Wedding</div>
+          <div class="card-title">Pre-Wedding Stories</div>
+          <div class="card-note">Concept-driven couple films.</div>
+          <span class="card-link">Watch the film</span>
+        </div>
+      </a>
+      <a class="card reveal" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
+        <img src="photos/work-4.jpg" alt="Commercial film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-4.jpg</div>'">
+        <div class="card-body">
+          <div class="card-cat">Commercial</div>
+          <div class="card-title">Brand Films</div>
+          <div class="card-note">Product, fashion and lifestyle reels.</div>
+          <span class="card-link">Watch the film</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="photos">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Stills.</h2>
+      <p>Moments, paused.</p>
+    </div>
+    <div class="gallery">
+      <figure class="reveal"><img src="photos/photo-1.jpg" alt="Portfolio photo 1" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-1.jpg</div>'"></figure>
+      <figure class="reveal"><img src="photos/photo-2.jpg" alt="Portfolio photo 2" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-2.jpg</div>'"></figure>
+      <figure class="reveal"><img src="photos/photo-3.jpg" alt="Portfolio photo 3" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-3.jpg</div>'"></figure>
+      <figure class="reveal"><img src="photos/photo-4.jpg" alt="Portfolio photo 4" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-4.jpg</div>'"></figure>
+      <figure class="reveal"><img src="photos/photo-5.jpg" alt="Portfolio photo 5" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-5.jpg</div>'"></figure>
+      <figure class="reveal"><img src="photos/photo-6.jpg" alt="Portfolio photo 6" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-6.jpg</div>'"></figure>
+      <figure class="reveal"><img src="photos/photo-7.jpg" alt="Portfolio photo 7" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-7.jpg</div>'"></figure>
+      <figure class="reveal"><img src="photos/photo-8.jpg" alt="Portfolio photo 8" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-8.jpg</div>'"></figure>
+      <figure class="reveal"><img src="photos/photo-9.jpg" alt="Portfolio photo 9" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-9.jpg</div>'"></figure>
+    </div>
+    <p class="gallery-note">Add images to a <code>photos/</code> folder named <code>photo-1.jpg</code> to <code>photo-9.jpg</code>. They appear here automatically.</p>
+  </div>
+</section>
+
+<section class="pro">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Shot on <em>pro gear.</em><br>Graded like cinema.</h2>
+      <p>The kit behind every frame.</p>
+    </div>
+    <div class="spec-grid">
+      <div class="spec reveal"><h3>Sony A7S III</h3><p>Low-light king. 4K 120fps.</p></div>
+      <div class="spec reveal"><h3>DJI Drone</h3><p>Cinematic aerials.</p></div>
+      <div class="spec reveal"><h3>Gimbal</h3><p>Movement, stabilized.</p></div>
+      <div class="spec reveal"><h3>MacBook M4 Pro</h3><p>The edit machine.</p></div>
+      <div class="spec reveal"><h3>OLED Reference Rig</h3><p>LG C5 + DeckLink 4K grading setup.</p></div>
+      <div class="spec reveal"><h3>DaVinci Resolve</h3><p>Color, perfected.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap story">
+    <div class="section-head"><h2>The story.</h2></div>
+    <p>Four years as a software engineer at <strong>TCS</strong>. Code by day, weddings on weekends. Eventually, the camera won.</p>
+    <p>Today I run <strong>WedFilmers</strong>, a wedding films studio in Delhi — and document the journey of an engineer turned filmmaker. DIY grading rigs, automated edit pipelines, and the craft behind every frame.</p>
+    <p><strong>The engineering never left. It just changed lenses.</strong></p>
+  </div>
+</section>
+
+<section class="bg-alt" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What I shoot.</h2>
+      <p>From shaadi to showroom.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal"><h3>Weddings</h3><p>Candid photography, cinematic films, pre-weddings and same-day edits via WedFilmers.</p></div>
+      <div class="svc reveal"><h3>Car Deliveries</h3><p>Cinematic delivery-day films for new car owners across Delhi NCR.</p></div>
+      <div class="svc reveal"><h3>Brands</h3><p>Reels and ad films for camera, automotive, fashion, fitness and grooming brands.</p></div>
+      <div class="svc reveal"><h3>Events</h3><p>Corporate events, parties, and anything that needs a cinematic eye.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>Let's shoot something.</h2>
+    <p>Collaborations, weddings, brand work — or just to talk cameras.</p>
+    <div class="cta-row">
+      <a class="btn btn-solid" href="mailto:pankaj@btechwalafilmmaker.com">Email me</a>
+      <a class="btn btn-ghost" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn btn-ghost" href="https://www.wedfilmers.in" target="_blank" rel="noopener">WedFilmers</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Pankaj Khandelwal · @btechwalafilmmaker · Delhi NCR</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
