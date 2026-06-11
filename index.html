@@ -245,6 +245,27 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
   html{scroll-behavior:auto}
 }
 
+/* ---------- TOUCH DEVICES: work gallery becomes a native swipe slider ---------- */
+.swipe-hint{
+  display:none;text-align:center;color:var(--gray);
+  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-top:16px;
+}
+@media (hover:none), (pointer:coarse){
+  .work-outer{height:auto !important;padding:10vh 0}
+  .work-track-wrap{position:static;height:auto;overflow:visible;display:block}
+  .work-track{
+    transform:none !important;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:10px;
+    scrollbar-width:none;
+  }
+  .work-track::-webkit-scrollbar{display:none}
+  .card{scroll-snap-align:center}
+  .swipe-hint{display:block}
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:760px){
   .svc-grid{grid-template-columns:1fr}
@@ -349,6 +370,7 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
         </div>
       </a>
     </div>
+    <div class="swipe-hint">‹ Swipe ›</div>
   </div>
 </section>
 
