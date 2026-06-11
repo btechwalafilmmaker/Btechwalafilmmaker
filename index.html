@@ -48,7 +48,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:4
 
 /* ---------- HERO (scroll scale + fade) ---------- */
 .hero{
-  height:160vh;
+  height:220vh;
   position:relative;
 }
 .hero-pin{
@@ -56,12 +56,27 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:4
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:0 22px;
   will-change:transform,opacity;
+  overflow:hidden;
 }
+.hero-img{
+  position:absolute;inset:0;z-index:-1;
+  width:100%;height:100%;object-fit:cover;
+  opacity:0;
+  transform:scale(1.18);
+  filter:blur(16px) brightness(.55);
+  will-change:opacity,transform,filter;
+}
+.hero-pin::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(0,0,0,.3),transparent 45%,rgba(0,0,0,.6));
+}
+.hero-copy{will-change:transform,opacity}
 .hero h1{
   font-size:clamp(3rem,9vw,6.4rem);
   font-weight:700;
   letter-spacing:-.03em;
-  line-height:1.02;
+  line-height:1.08;
+  padding-bottom:.08em;
   background:linear-gradient(180deg,#fff 40%,#9a9aa0);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
@@ -82,13 +97,40 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:4
 @keyframes hint{0%,100%{opacity:.35;transform:translate(-50%,0)}50%{opacity:.9;transform:translate(-50%,6px)}}
 
 /* ---------- BIG STATEMENT (per-word reveal) ---------- */
-.statement{padding:16vh 22px;max-width:900px;margin:0 auto;text-align:center}
+.statement{
+  padding:40vh 22px 16vh;max-width:900px;
+  margin:-100vh auto 0;            /* slides in over the hero photo before it fades */
+  position:relative;z-index:5;
+  text-align:center;
+}
 .statement p{
   font-size:clamp(1.8rem,4.6vw,3.4rem);
   font-weight:700;letter-spacing:-.025em;line-height:1.15;
 }
 .statement .w{opacity:.14;transition:opacity .35s ease}
 .statement .w.lit{opacity:1}
+.vf{
+  position:relative;display:inline-block;padding:46px 54px;
+  will-change:transform;
+}
+.vf p{transition:filter .3s ease}
+.vf .c{
+  position:absolute;width:34px;height:34px;
+  border:3px solid rgba(255,255,255,.8);
+  transition:border-color .35s;
+}
+.vf .tl{top:0;left:0;border-right:none;border-bottom:none}
+.vf .tr{top:0;right:0;border-left:none;border-bottom:none}
+.vf .bl{bottom:0;left:0;border-right:none;border-top:none}
+.vf .br{bottom:0;right:0;border-left:none;border-top:none}
+.vf .tag{
+  position:absolute;top:-30px;right:2px;
+  font-size:.68rem;font-weight:600;letter-spacing:.14em;
+  color:rgba(255,255,255,.55);transition:color .35s;
+}
+.vf.locked .c{border-color:#34d399}
+.vf.locked .tag{color:#34d399}
+@media (max-width:600px){.vf{padding:32px 26px}}
 
 /* ---------- WORK: pinned horizontal scroll ---------- */
 .work-outer{position:relative}
@@ -108,7 +150,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:4
   transition:border-color .3s;
 }
 .card:hover{text-decoration:none;border-color:rgba(255,255,255,.25)}
-.card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#1c1c1e}
+.card img,.card video{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#1c1c1e}
 .card .fallback{
   width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
   background:#1c1c1e;color:var(--gray);font-size:.8rem;
@@ -133,6 +175,59 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:4
 .gallery-note{text-align:center;color:var(--gray);font-size:.85rem;margin-top:30px}
 .gallery-note code{background:#1c1c1e;padding:2px 7px;border-radius:6px;font-size:.8rem}
 
+/* ---------- REELS ---------- */
+.reels{padding:12vh 0}
+.reel-row{
+  display:flex;gap:20px;overflow-x:auto;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  padding:6px max(22px,calc((100vw - 1024px)/2)) 14px;
+  scrollbar-width:none;
+}
+.reel-row::-webkit-scrollbar{display:none}
+.reel{
+  flex:0 0 auto;width:min(72vw,320px);aspect-ratio:9/16;
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  background:#101012;border:1px solid rgba(255,255,255,.08);
+  scroll-snap-align:center;
+}
+.reel video{width:100%;height:100%;object-fit:cover;display:block}
+.reel{cursor:pointer}
+.reel .snd{
+  position:absolute;top:14px;right:14px;z-index:2;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;color:#fff;pointer-events:none;
+}
+.reel .snd::before{content:"🔇"}
+.reel.sound .snd::before{content:"🔊"}
+.reel .ig{
+  position:absolute;left:0;right:0;bottom:0;padding:14px 16px;
+  background:linear-gradient(transparent,rgba(0,0,0,.75));
+  font-size:.8rem;color:#fff;
+}
+.reel .ig:hover{text-decoration:none;color:var(--blue)}
+.reels-note{text-align:center;color:var(--gray);font-size:.85rem;margin-top:24px}
+.reels-note code{background:#1c1c1e;padding:2px 7px;border-radius:6px;font-size:.8rem}
+
+/* Phones: full-screen vertical snap feed, exactly like Instagram */
+@media (hover:none) and (max-width:760px){
+  .reel-row{
+    flex-direction:column;
+    overflow-y:auto;overflow-x:hidden;
+    height:100svh;
+    scroll-snap-type:y mandatory;
+    gap:0;padding:0;
+    border-radius:var(--radius);
+  }
+  .reel{
+    width:100%;height:100svh;aspect-ratio:auto;
+    flex:0 0 100svh;
+    border:none;border-radius:0;
+    scroll-snap-align:start;scroll-snap-stop:always;
+  }
+}
+
 /* ---------- GEAR ---------- */
 .pro{padding:14vh 0}
 .pro .section-head h2 em{
@@ -144,6 +239,18 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:4
 .spec{background:#101012;border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:30px 24px;text-align:center}
 .spec h3{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
 .spec p{color:var(--gray);font-size:.85rem;margin-top:6px}
+
+/* ---------- ME: parallax portrait ---------- */
+.me-wrap{
+  max-width:680px;margin:0 auto;
+  border-radius:var(--radius);overflow:hidden;
+  aspect-ratio:4/5;background:#1c1c1e;
+}
+.me-wrap img{
+  width:100%;height:120%;object-fit:cover;display:block;
+  will-change:transform;
+}
+@media (max-width:760px){.me-wrap{margin:0 22px}}
 
 /* ---------- STORY ---------- */
 .story{max-width:680px;margin:0 auto;text-align:center;padding:10vh 22px}
@@ -242,6 +349,8 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
   .hero-pin{position:relative;height:100vh}
   .scroll-hint{animation:none}
   #grain,.marquee-inner,#loader .name{animation:none}
+  .hero-img{opacity:1;transform:none;filter:blur(0) brightness(.5);transition:none}
+  .statement{margin-top:0;padding-top:16vh}
   html{scroll-behavior:auto}
 }
 
@@ -293,7 +402,7 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
     <a class="logo" href="#top">Pankaj Khandelwal</a>
     <div class="navlinks">
       <a href="#work">Work</a>
-      <a href="#photos">Photos</a>
+      <a href="#reels">Reels</a>
       <a href="#story">Story</a>
       <a href="#services">Services</a>
       <a href="#contact">Contact</a>
@@ -304,19 +413,26 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
 <!-- HERO: pins and scales away as you scroll -->
 <header class="hero" id="top">
   <div class="hero-pin" id="heroPin">
-    <h1>Filmmaker.<br>Engineered differently.</h1>
-    <p class="sub">Wedding films, automotive shoots, commercials and creator content.<br>Made in Delhi NCR.</p>
-    <div class="hero-links">
-      <a href="#work">Watch the work</a>
-      <a href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">Follow on Instagram</a>
+    <img class="hero-img" id="heroImg" src="photos/hero.jpg" alt="" aria-hidden="true" onerror="this.remove()">
+    <div class="hero-copy" id="heroCopy">
+      <h1>Filmmaker.<br>Engineered differently.</h1>
+      <p class="sub">Wedding films, automotive shoots, commercials and creator content.<br>Made in Delhi NCR.</p>
+      <div class="hero-links">
+        <a href="#work">Watch the work</a>
+        <a href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">Follow on Instagram</a>
+      </div>
     </div>
     <div class="scroll-hint">Scroll</div>
   </div>
 </header>
 
-<!-- STATEMENT: words light up as you scroll -->
+<!-- STATEMENT: camera viewfinder locks focus as you scroll -->
 <div class="statement" id="statement">
-  <p>Every frame is a decision. Light, motion, emotion — engineered into stories people feel.</p>
+  <div class="vf" id="vfBox">
+    <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
+    <span class="tag" id="vfTag">FOCUSING…</span>
+    <p>Every frame is a decision. Light, motion, emotion — engineered into stories people feel.</p>
+  </div>
 </div>
 
 <div class="marquee" aria-hidden="true">
@@ -334,7 +450,7 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
     </div>
     <div class="work-track" id="workTrack">
       <a class="card" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
-        <img src="photos/work-1.jpg" alt="Wedding film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-1.jpg</div>'">
+        <video class="card-vid" src="bg/card-1.mp4" poster="photos/work-1.jpg" muted loop playsinline preload="metadata" aria-label="Wedding film preview"></video>
         <div class="card-body">
           <div class="card-cat">Wedding Film</div>
           <div class="card-title">Cinematic Weddings</div>
@@ -343,7 +459,7 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
         </div>
       </a>
       <a class="card" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
-        <img src="photos/work-2.jpg" alt="Automotive film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-2.jpg</div>'">
+        <video class="card-vid" src="bg/card-2.mp4" poster="photos/work-2.jpg" muted loop playsinline preload="metadata" aria-label="Automotive film preview"></video>
         <div class="card-body">
           <div class="card-cat">Automotive</div>
           <div class="card-title">Automotive Films</div>
@@ -352,7 +468,7 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
         </div>
       </a>
       <a class="card" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
-        <img src="photos/work-3.jpg" alt="Commercial film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-3.jpg</div>'">
+        <video class="card-vid" src="bg/card-3.mp4" poster="photos/work-3.jpg" muted loop playsinline preload="metadata" aria-label="Commercial film preview"></video>
         <div class="card-body">
           <div class="card-cat">Commercial</div>
           <div class="card-title">Brand Commercials</div>
@@ -361,7 +477,7 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
         </div>
       </a>
       <a class="card" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
-        <img src="photos/work-4.jpg" alt="Influencer and UGC content still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-4.jpg</div>'">
+        <video class="card-vid" src="bg/card-4.mp4" poster="photos/work-4.jpg" muted loop playsinline preload="metadata" aria-label="Influencer and UGC preview"></video>
         <div class="card-body">
           <div class="card-cat">Influencer &amp; UGC</div>
           <div class="card-title">Creator Content</div>
@@ -374,31 +490,25 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
   </div>
 </section>
 
-<!-- STILLS: parallax columns -->
-<section class="stills" id="photos">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Stills.</h2>
-      <p>Moments, paused.</p>
-    </div>
-    <div class="plx-grid" id="plxGrid">
-      <div class="plx-col" data-speed="-0.06">
-        <figure class="reveal"><img src="photos/photo-1.jpg" alt="Portfolio photo 1" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-1.jpg</div>'"></figure>
-        <figure class="reveal"><img src="photos/photo-4.jpg" alt="Portfolio photo 4" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-4.jpg</div>'"></figure>
-        <figure class="reveal"><img src="photos/photo-7.jpg" alt="Portfolio photo 7" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-7.jpg</div>'"></figure>
-      </div>
-      <div class="plx-col" data-speed="0.05">
-        <figure class="reveal"><img src="photos/photo-2.jpg" alt="Portfolio photo 2" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-2.jpg</div>'"></figure>
-        <figure class="reveal"><img src="photos/photo-5.jpg" alt="Portfolio photo 5" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-5.jpg</div>'"></figure>
-        <figure class="reveal"><img src="photos/photo-8.jpg" alt="Portfolio photo 8" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-8.jpg</div>'"></figure>
-      </div>
-      <div class="plx-col" data-speed="-0.04">
-        <figure class="reveal"><img src="photos/photo-3.jpg" alt="Portfolio photo 3" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-3.jpg</div>'"></figure>
-        <figure class="reveal"><img src="photos/photo-6.jpg" alt="Portfolio photo 6" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-6.jpg</div>'"></figure>
-        <figure class="reveal"><img src="photos/photo-9.jpg" alt="Portfolio photo 9" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-9.jpg</div>'"></figure>
-      </div>
-    </div>
-    <p class="gallery-note">Add images to <code>photos/</code> named <code>photo-1.jpg</code> to <code>photo-9.jpg</code>. They appear here automatically.</p>
+<!-- REELS -->
+<section class="reels" id="reels">
+  <div class="section-head">
+    <h2>Reels.</h2>
+    <p>Watch it move.</p>
+  </div>
+  <div class="reel-row" id="reelRow">
+    <div class="reel" data-src="reels/reel-1.mp4"></div>
+    <div class="reel" data-src="reels/reel-2.mp4"></div>
+    <div class="reel" data-src="reels/reel-3.mp4"></div>
+    <div class="reel" data-src="reels/reel-4.mp4"></div>
+    <div class="reel" data-src="reels/reel-5.mp4"></div>
+    <div class="reel" data-src="reels/reel-6.mp4"></div>
+    <div class="reel" data-src="reels/reel-7.mp4"></div>
+    <div class="reel" data-src="reels/reel-8.mp4"></div>
+    <div class="reel" data-src="reels/reel-9.mp4"></div>
+    <div class="reel" data-src="reels/reel-10.mp4"></div>
+    <div class="reel" data-src="reels/reel-11.mp4"></div>
+    <div class="reel" data-src="reels/reel-12.mp4"></div>
   </div>
 </section>
 
@@ -422,6 +532,9 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
 
 <!-- STORY -->
 <section id="story">
+  <figure class="me-wrap" id="meWrap">
+    <img id="meImg" src="photos/me.jpg" alt="Pankaj Khandelwal launching a drone in the snow" onerror="document.getElementById('meWrap').style.display='none'">
+  </figure>
   <div class="story">
     <div class="section-head"><h2>The story.</h2></div>
     <p class="reveal">Four years as a software engineer at <strong>TCS</strong>. Code by day, weddings on weekends. Eventually, the camera won.</p>
@@ -486,6 +599,64 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
   else addEventListener('load', ()=>setTimeout(hideLoader, 500));
   setTimeout(hideLoader, 3000); /* never trap the user if an image stalls */
 
+  /* ---------- Reels player: Instagram-style (must run even with reduced motion) ---------- */
+  const reels = document.querySelectorAll('.reel');
+  reels.forEach(reel=>{
+    const v = document.createElement('video');
+    v.src = reel.dataset.src;
+    v.preload = 'metadata';
+    v.loop = true;
+    v.muted = true;
+    v.playsInline = true;
+    v.setAttribute('playsinline','');
+    v.onerror = ()=>reel.remove();
+    const snd = document.createElement('div');
+    snd.className = 'snd';
+    reel.append(v, snd);
+    /* tap = toggle sound; only one reel has sound at a time */
+    reel.addEventListener('click', ()=>{
+      if(v.muted){
+        reels.forEach(r=>{
+          const rv = r.querySelector('video');
+          if(rv){ rv.muted = true; r.classList.remove('sound'); }
+        });
+        v.muted = false;
+        reel.classList.add('sound');
+        if(v.paused) v.play();
+      } else {
+        v.muted = true;
+        reel.classList.remove('sound');
+      }
+    });
+  });
+  /* autoplay muted in view, pause (and mute) out of view */
+  const reelObs = new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      const v = e.target.querySelector('video');
+      if(!v) return;
+      if(e.isIntersecting){
+        v.play().catch(()=>{});
+      } else {
+        v.pause();
+        v.muted = true;
+        e.target.classList.remove('sound');
+      }
+    });
+  },{threshold:.5});
+  reels.forEach(r=>reelObs.observe(r));
+
+  /* ---------- Work-card videos: play only while visible ---------- */
+  const vidObs = new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting) e.target.play().catch(()=>{});
+      else e.target.pause();
+    });
+  },{threshold:.25});
+  document.querySelectorAll('.card-vid').forEach(v=>{
+    v.onerror = ()=>{ if(v.poster){ const i=new Image(); i.src=v.poster; i.className=v.className; v.replaceWith(i);} else v.remove(); };
+    vidObs.observe(v);
+  });
+
   if(reduced) return;
 
   /* Split statement into words */
@@ -506,8 +677,6 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
 
   const heroPin = document.getElementById('heroPin');
   const hero = document.querySelector('.hero');
-  const cols = document.querySelectorAll('.plx-col');
-  const grid = document.getElementById('plxGrid');
 
   let ticking = false;
   function onScroll(){
@@ -516,16 +685,36 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
     requestAnimationFrame(()=>{
       const y = scrollY;
 
-      /* Hero: scale down + fade as it pins */
+      /* Hero: headline fades out, then the photo racks into focus */
       const hp = Math.min(Math.max(y/(hero.offsetHeight - innerHeight),0),1);
-      heroPin.style.opacity = 1 - hp*1.1;
-      heroPin.style.transform = 'scale(' + (1 - hp*.12) + ')';
+      const copyP = Math.min(hp/.4, 1);
+      const heroCopy = document.getElementById('heroCopy');
+      heroCopy.style.opacity = 1 - copyP;
+      heroCopy.style.transform = 'translateY(' + (-copyP*40) + 'px) scale(' + (1 - copyP*.06) + ')';
+      const heroImg = document.getElementById('heroImg');
+      if(heroImg){
+        const imgP = Math.min(Math.max((hp - .15)/.4, 0), 1);   /* rack into focus */
+        const zoomP = Math.min(Math.max((hp - .6)/.4, 0), 1);   /* then keep pulling back */
+        const fadeP = Math.min(Math.max((hp - .85)/.15, 0), 1); /* fade at the end */
+        heroImg.style.opacity = imgP * (1 - fadeP);
+        heroImg.style.filter = 'blur(' + ((1-imgP)*16 + zoomP*2) + 'px) brightness(' + (.55 - fadeP*.25) + ')';
+        heroImg.style.transform = 'scale(' + (1.18 - imgP*.18 - zoomP*.14) + ')';
+      }
+      heroPin.style.opacity = 1;
 
       /* Statement: light words up by progress through the block */
       const r = st.getBoundingClientRect();
       const sp = Math.min(Math.max((innerHeight*.8 - r.top)/(innerHeight*.7),0),1);
       const lit = Math.floor(sp*words.length);
       words.forEach((w,i)=>w.classList.toggle('lit', i<lit));
+
+      /* Viewfinder: brackets tighten and text sharpens until AF locks */
+      const vf = document.getElementById('vfBox');
+      vf.style.transform = 'scale(' + (1.14 - sp*.14) + ')';
+      st.style.filter = 'blur(' + ((1-sp)*5) + 'px)';
+      const locked = sp >= 1;
+      vf.classList.toggle('locked', locked);
+      document.getElementById('vfTag').textContent = locked ? 'AF LOCKED' : 'FOCUSING…';
 
       /* Work: translate track horizontally while pinned */
       const wr = workOuter.getBoundingClientRect();
@@ -535,12 +724,15 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
         track.style.transform = 'translateX(' + (-wp*dist) + 'px)';
       }
 
-      /* Stills: parallax drift per column */
-      const gr = grid.getBoundingClientRect();
-      const center = gr.top + gr.height/2 - innerHeight/2;
-      cols.forEach(c=>{
-        c.style.transform = 'translateY(' + (center * parseFloat(c.dataset.speed)) + 'px)';
-      });
+      /* Portrait: drifts slower than the page for depth */
+      const meWrap = document.getElementById('meWrap');
+      if(meWrap){
+        const mr = meWrap.getBoundingClientRect();
+        if(mr.bottom > 0 && mr.top < innerHeight){
+          const p = (mr.top + mr.height/2 - innerHeight/2) / innerHeight;
+          document.getElementById('meImg').style.transform = 'translateY(' + (p * mr.height * -0.16) + 'px)';
+        }
+      }
 
       ticking = false;
     });
@@ -582,7 +774,26 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
 
     /* ---------- Smooth inertia scrolling (wheel only) ---------- */
     let target = scrollY, eased = scrollY, smoothing = false;
+    const reelRow = document.getElementById('reelRow');
     addEventListener('wheel', e=>{
+      /* over the reels: each wheel tick flicks to the next/previous reel */
+      if(reelRow.contains(e.target)){
+        const max = reelRow.scrollWidth - reelRow.clientWidth;
+        const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        const atStart = reelRow.scrollLeft <= 0 && d < 0;
+        const atEnd = reelRow.scrollLeft >= max - 1 && d > 0;
+        if(max > 0 && !atStart && !atEnd){
+          e.preventDefault();
+          const now = Date.now();
+          if(!reelRow._lastFlick || now - reelRow._lastFlick > 350){
+            reelRow._lastFlick = now;
+            const card = reelRow.querySelector('.reel');
+            const step = card ? card.offsetWidth + 20 : 340;
+            reelRow.scrollBy({left: d > 0 ? step : -step, behavior:'smooth'});
+          }
+          return;
+        }
+      }
       e.preventDefault();
       target = Math.max(0, Math.min(target + e.deltaY,
         document.documentElement.scrollHeight - innerHeight));
