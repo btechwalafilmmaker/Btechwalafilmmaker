@@ -4,15 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pankaj Khandelwal — Filmmaker | Delhi NCR</title>
-<meta name="description" content="Pankaj Khandelwal — engineer turned filmmaker. Wedding films, car delivery shoots, cinematic reels and commercial video in Delhi NCR.">
+<meta name="description" content="Pankaj Khandelwal — engineer turned filmmaker. Wedding films, automotive shoots, commercials, influencer shoots and UGC content in Delhi NCR. Open to collaborations.">
 <style>
 :root{
-  --bg:#ffffff;
-  --bg-alt:#f5f5f7;
-  --ink:#1d1d1f;
-  --gray:#6e6e73;
-  --blue:#0066cc;
-  --radius:18px;
+  --bg:#000;
+  --ink:#f5f5f7;
+  --gray:#86868b;
+  --blue:#2997ff;
+  --radius:22px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -24,149 +23,237 @@ body{
   line-height:1.47;
   -webkit-font-smoothing:antialiased;
   letter-spacing:-.01em;
+  overflow-x:hidden;
 }
-.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.wrap{max-width:1024px;margin:0 auto;padding:0 22px}
 a{color:var(--blue);text-decoration:none}
 a:hover{text-decoration:underline}
 a:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+img{user-select:none;-webkit-user-drag:none}
 
 /* ---------- NAV ---------- */
 nav{
-  position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.72);
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(0,0,0,.55);
   backdrop-filter:saturate(180%) blur(20px);
   -webkit-backdrop-filter:saturate(180%) blur(20px);
-  border-bottom:1px solid rgba(0,0,0,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:48px;max-width:980px}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:48px}
 .logo{font-weight:600;font-size:.95rem;color:var(--ink)}
 .logo:hover{text-decoration:none}
 .navlinks{display:flex;gap:28px}
-.navlinks a{color:var(--ink);font-size:.78rem;opacity:.8;transition:opacity .2s}
+.navlinks a{color:var(--ink);font-size:.78rem;opacity:.75;transition:opacity .2s}
 .navlinks a:hover{opacity:1;text-decoration:none}
 
-/* ---------- HERO ---------- */
-.hero{text-align:center;padding:110px 22px 90px}
+/* ---------- HERO (scroll scale + fade) ---------- */
+.hero{
+  height:160vh;
+  position:relative;
+}
+.hero-pin{
+  position:sticky;top:0;height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:0 22px;
+  will-change:transform,opacity;
+}
 .hero h1{
-  font-size:clamp(2.8rem,7vw,4.6rem);
+  font-size:clamp(3rem,9vw,6.4rem);
   font-weight:700;
-  letter-spacing:-.025em;
-  line-height:1.05;
+  letter-spacing:-.03em;
+  line-height:1.02;
+  background:linear-gradient(180deg,#fff 40%,#9a9aa0);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .hero .sub{
-  font-size:clamp(1.2rem,2.6vw,1.65rem);
+  font-size:clamp(1.15rem,2.6vw,1.6rem);
   color:var(--gray);
-  font-weight:400;
-  margin-top:14px;
+  margin-top:18px;
   letter-spacing:-.015em;
 }
-.hero-links{margin-top:26px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
-.hero-links a{font-size:1.05rem}
+.hero-links{margin-top:30px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.hero-links a{font-size:1.1rem}
 .hero-links a::after{content:" ›"}
-
-/* ---------- SECTION BASICS ---------- */
-section{padding:90px 0}
-.section-head{text-align:center;margin-bottom:50px}
-.section-head h2{
-  font-size:clamp(2rem,5vw,3.2rem);
-  font-weight:700;letter-spacing:-.02em;line-height:1.08;
+.scroll-hint{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  color:var(--gray);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+  animation:hint 2.2s ease-in-out infinite;
 }
-.section-head p{color:var(--gray);font-size:1.2rem;margin-top:10px;letter-spacing:-.01em}
+@keyframes hint{0%,100%{opacity:.35;transform:translate(-50%,0)}50%{opacity:.9;transform:translate(-50%,6px)}}
 
-/* ---------- WORK CARDS ---------- */
-.bg-alt{background:var(--bg-alt)}
-.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+/* ---------- BIG STATEMENT (per-word reveal) ---------- */
+.statement{padding:16vh 22px;max-width:900px;margin:0 auto;text-align:center}
+.statement p{
+  font-size:clamp(1.8rem,4.6vw,3.4rem);
+  font-weight:700;letter-spacing:-.025em;line-height:1.15;
+}
+.statement .w{opacity:.14;transition:opacity .35s ease}
+.statement .w.lit{opacity:1}
+
+/* ---------- WORK: pinned horizontal scroll ---------- */
+.work-outer{position:relative}
+.work-track-wrap{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.work-head{text-align:center;margin-bottom:36px}
+.work-head h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:700;letter-spacing:-.02em}
+.work-head p{color:var(--gray);font-size:1.15rem;margin-top:8px}
+.work-track{
+  display:flex;gap:24px;padding:0 max(22px,calc((100vw - 1024px)/2));
+  will-change:transform;
+}
 .card{
-  background:#fff;border-radius:var(--radius);overflow:hidden;
-  box-shadow:0 1px 2px rgba(0,0,0,.04);
-  transition:transform .3s cubic-bezier(.2,.6,.2,1),box-shadow .3s;
+  flex:0 0 min(72vw,560px);
+  background:#101012;border-radius:var(--radius);overflow:hidden;
   display:block;color:var(--ink);
+  border:1px solid rgba(255,255,255,.08);
+  transition:border-color .3s;
 }
-.card:hover{transform:scale(1.015);box-shadow:0 12px 32px rgba(0,0,0,.10);text-decoration:none}
-.card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#e8e8ed}
+.card:hover{text-decoration:none;border-color:rgba(255,255,255,.25)}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#1c1c1e}
 .card .fallback{
   width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
-  background:#e8e8ed;color:var(--gray);font-size:.8rem;
+  background:#1c1c1e;color:var(--gray);font-size:.8rem;
 }
-.card-body{padding:22px 24px 26px;text-align:center}
+.card-body{padding:22px 26px 28px}
 .card-cat{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--gray)}
-.card-title{font-size:1.3rem;font-weight:700;margin-top:4px;letter-spacing:-.015em}
+.card-title{font-size:1.4rem;font-weight:700;margin-top:4px;letter-spacing:-.015em}
 .card-note{color:var(--gray);font-size:.92rem;margin-top:4px}
-.card-link{display:inline-block;margin-top:10px;font-size:.95rem;color:var(--blue)}
+.card-link{display:inline-block;margin-top:12px;font-size:.95rem;color:var(--blue)}
 .card-link::after{content:" ›"}
 
-/* ---------- GALLERY ---------- */
-.gallery{columns:3;column-gap:16px}
-.gallery figure{break-inside:avoid;margin-bottom:16px;border-radius:var(--radius);overflow:hidden;background:#e8e8ed}
-.gallery img{width:100%;display:block;transition:transform .4s cubic-bezier(.2,.6,.2,1)}
-.gallery figure:hover img{transform:scale(1.04)}
+/* ---------- STILLS: parallax gallery ---------- */
+.stills{padding:14vh 0 10vh}
+.section-head{text-align:center;margin-bottom:54px}
+.section-head h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:700;letter-spacing:-.02em}
+.section-head p{color:var(--gray);font-size:1.15rem;margin-top:8px}
+.plx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.plx-col{display:flex;flex-direction:column;gap:18px;will-change:transform}
+.plx-col figure{border-radius:var(--radius);overflow:hidden;background:#1c1c1e}
+.plx-col img{width:100%;display:block}
 .ph{display:flex;align-items:center;justify-content:center;color:var(--gray);font-size:.75rem;text-align:center;padding:10px}
-.gallery-note{text-align:center;color:var(--gray);font-size:.85rem;margin-top:26px}
-.gallery-note code{background:#e8e8ed;padding:2px 7px;border-radius:6px;font-size:.8rem}
+.gallery-note{text-align:center;color:var(--gray);font-size:.85rem;margin-top:30px}
+.gallery-note code{background:#1c1c1e;padding:2px 7px;border-radius:6px;font-size:.8rem}
 
-/* ---------- DARK PRO SECTION ---------- */
-.pro{background:#000;color:#f5f5f7}
-.pro .section-head h2{color:#f5f5f7}
+/* ---------- GEAR ---------- */
+.pro{padding:14vh 0}
 .pro .section-head h2 em{
   font-style:normal;
   background:linear-gradient(90deg,#a78bfa,#60a5fa,#34d399);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.pro .section-head p{color:#86868b}
-.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:0 auto}
-.spec{
-  background:#161617;border-radius:var(--radius);padding:28px 24px;text-align:center;
-}
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:880px;margin:0 auto}
+.spec{background:#101012;border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:30px 24px;text-align:center}
 .spec h3{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
-.spec p{color:#86868b;font-size:.85rem;margin-top:6px}
+.spec p{color:var(--gray);font-size:.85rem;margin-top:6px}
 
 /* ---------- STORY ---------- */
-.story{max-width:680px;margin:0 auto;text-align:center}
-.story p{font-size:1.25rem;color:var(--gray);letter-spacing:-.012em;line-height:1.55;margin-bottom:22px}
+.story{max-width:680px;margin:0 auto;text-align:center;padding:10vh 22px}
+.story p{font-size:1.3rem;color:var(--gray);letter-spacing:-.012em;line-height:1.55;margin-bottom:24px}
 .story p strong{color:var(--ink);font-weight:600}
 
 /* ---------- SERVICES ---------- */
-.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.svc{background:#fff;border-radius:var(--radius);padding:34px 30px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.services{padding:12vh 0}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.svc{background:#101012;border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:36px 32px}
 .svc h3{font-size:1.25rem;font-weight:700;letter-spacing:-.015em}
 .svc p{color:var(--gray);font-size:.95rem;margin-top:8px}
 
 /* ---------- CONTACT ---------- */
-.contact{text-align:center}
-.contact h2{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;letter-spacing:-.02em}
-.contact p{color:var(--gray);font-size:1.2rem;margin-top:10px}
-.cta-row{margin-top:30px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-.btn{
-  display:inline-block;padding:13px 28px;border-radius:980px;
-  font-size:1rem;font-weight:500;transition:all .2s;
-}
-.btn-solid{background:var(--blue);color:#fff}
-.btn-solid:hover{background:#0055ab;text-decoration:none}
+.contact{text-align:center;padding:16vh 22px}
+.contact h2{font-size:clamp(2.2rem,6vw,4rem);font-weight:700;letter-spacing:-.025em}
+.contact p{color:var(--gray);font-size:1.2rem;margin-top:12px}
+.cta-row{margin-top:34px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 28px;border-radius:980px;font-size:1rem;font-weight:500;transition:all .2s}
+.btn-solid{background:var(--blue);color:#000}
+.btn-solid:hover{filter:brightness(1.12);text-decoration:none}
 .btn-ghost{color:var(--blue);border:1px solid var(--blue)}
-.btn-ghost:hover{background:rgba(0,102,204,.06);text-decoration:none}
+.btn-ghost:hover{background:rgba(41,151,255,.1);text-decoration:none}
 
-footer{padding:36px 0 50px;border-top:1px solid rgba(0,0,0,.08)}
+footer{padding:40px 0 56px;border-top:1px solid rgba(255,255,255,.08)}
 footer p{text-align:center;color:var(--gray);font-size:.78rem}
 
+/* ---------- PRELOADER ---------- */
+#loader{
+  position:fixed;inset:0;z-index:1000;background:#000;
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .6s ease,visibility .6s;
+}
+#loader.done{opacity:0;visibility:hidden}
+#loader .name{
+  font-size:clamp(1.4rem,4vw,2.2rem);font-weight:700;letter-spacing:-.02em;
+  background:linear-gradient(90deg,#555,#fff,#555);
+  background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 1.4s linear infinite;
+}
+@keyframes shine{to{background-position:-200% 0}}
+
+/* ---------- FILM GRAIN ---------- */
+#grain{
+  position:fixed;inset:-100%;z-index:900;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity:.05;
+  animation:grain 7s steps(10) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0)}10%{transform:translate(-3%,2%)}20%{transform:translate(2%,-4%)}
+  30%{transform:translate(-4%,-2%)}40%{transform:translate(3%,3%)}50%{transform:translate(-2%,4%)}
+  60%{transform:translate(4%,-3%)}70%{transform:translate(-3%,-4%)}80%{transform:translate(2%,2%)}90%{transform:translate(-4%,3%)}
+}
+
+/* ---------- CUSTOM CURSOR ---------- */
+@media (pointer:fine){
+  .cursor-dot,.cursor-ring{
+    position:fixed;top:0;left:0;z-index:950;pointer-events:none;border-radius:50%;
+    transform:translate(-50%,-50%);
+  }
+  .cursor-dot{width:7px;height:7px;background:#fff}
+  .cursor-ring{
+    width:36px;height:36px;border:1px solid rgba(255,255,255,.45);
+    transition:width .25s,height .25s,border-color .25s,background .25s;
+  }
+  .cursor-ring.hot{width:58px;height:58px;border-color:rgba(255,255,255,.9);background:rgba(255,255,255,.06)}
+  body.has-cursor, body.has-cursor a, body.has-cursor .btn{cursor:none}
+}
+
+/* ---------- MARQUEE ---------- */
+.marquee{
+  overflow:hidden;white-space:nowrap;padding:26px 0;
+  border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);
+}
+.marquee-inner{display:inline-block;animation:marq 28s linear infinite;will-change:transform}
+.marquee span{
+  font-size:clamp(1.4rem,3.4vw,2.4rem);font-weight:700;letter-spacing:-.01em;
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.35);
+  margin-right:48px;text-transform:uppercase;
+}
+.marquee span.fill{color:var(--ink);-webkit-text-stroke:0}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- MAGNETIC ---------- */
+.btn{will-change:transform}
+
 /* ---------- REVEAL ---------- */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.6,.2,1),transform .8s cubic-bezier(.2,.6,.2,1)}
 .reveal.in{opacity:1;transform:none}
+
 @media (prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-  .card,.gallery img{transition:none}
+  .reveal,.statement .w{opacity:1;transform:none;transition:none}
+  .hero{height:100vh}
+  .hero-pin{position:relative;height:100vh}
+  .scroll-hint{animation:none}
+  #grain,.marquee-inner,#loader .name{animation:none}
   html{scroll-behavior:auto}
 }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:760px){
-  .work-grid{grid-template-columns:1fr}
   .svc-grid{grid-template-columns:1fr}
   .spec-grid{grid-template-columns:1fr 1fr}
-  .gallery{columns:2}
+  .plx-grid{grid-template-columns:repeat(2,1fr)}
+  .plx-col:nth-child(3){display:none}
   .navlinks{gap:18px}
   .navlinks a:nth-child(n+4){display:none}
-  .hero{padding:80px 22px 64px}
-  section{padding:64px 0}
+  .card{flex-basis:82vw}
 }
 @media (max-width:480px){
   .spec-grid{grid-template-columns:1fr}
@@ -174,6 +261,11 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
 </style>
 </head>
 <body>
+
+<div id="loader"><div class="name">Pankaj Khandelwal</div></div>
+<div id="grain"></div>
+<div class="cursor-ring" id="cring"></div>
+<div class="cursor-dot" id="cdot"></div>
 
 <nav>
   <div class="wrap">
@@ -188,24 +280,39 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
   </div>
 </nav>
 
+<!-- HERO: pins and scales away as you scroll -->
 <header class="hero" id="top">
-  <h1>Filmmaker.<br>Engineered differently.</h1>
-  <p class="sub">Wedding films, car deliveries and cinematic stories.<br>Made in Delhi NCR.</p>
-  <div class="hero-links">
-    <a href="#work">Watch the work</a>
-    <a href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">Follow on Instagram</a>
+  <div class="hero-pin" id="heroPin">
+    <h1>Filmmaker.<br>Engineered differently.</h1>
+    <p class="sub">Wedding films, automotive shoots, commercials and creator content.<br>Made in Delhi NCR.</p>
+    <div class="hero-links">
+      <a href="#work">Watch the work</a>
+      <a href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">Follow on Instagram</a>
+    </div>
+    <div class="scroll-hint">Scroll</div>
   </div>
 </header>
 
-<section class="bg-alt" id="work">
-  <div class="wrap">
-    <div class="section-head">
+<!-- STATEMENT: words light up as you scroll -->
+<div class="statement" id="statement">
+  <p>Every frame is a decision. Light, motion, emotion — engineered into stories people feel.</p>
+</div>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Weddings</span><span class="fill">Automotive</span><span>Commercials</span><span class="fill">Influencer</span><span>UGC</span><span class="fill">Collabs</span><span>Weddings</span><span class="fill">Automotive</span><span>Commercials</span><span class="fill">Influencer</span><span>UGC</span><span class="fill">Collabs</span>
+  </div>
+</div>
+
+<!-- WORK: pinned horizontal scroll -->
+<section class="work-outer" id="work">
+  <div class="work-track-wrap">
+    <div class="work-head">
       <h2>The work.</h2>
       <p>Every frame, intentional.</p>
     </div>
-    <div class="work-grid">
-      <!-- Replace href with your actual reel / YouTube links -->
-      <a class="card reveal" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
+    <div class="work-track" id="workTrack">
+      <a class="card" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
         <img src="photos/work-1.jpg" alt="Wedding film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-1.jpg</div>'">
         <div class="card-body">
           <div class="card-cat">Wedding Film</div>
@@ -214,30 +321,30 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
           <span class="card-link">Watch the film</span>
         </div>
       </a>
-      <a class="card reveal" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
-        <img src="photos/work-2.jpg" alt="Car delivery film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-2.jpg</div>'">
+      <a class="card" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
+        <img src="photos/work-2.jpg" alt="Automotive film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-2.jpg</div>'">
         <div class="card-body">
-          <div class="card-cat">Car Delivery</div>
-          <div class="card-title">Delivery Day Films</div>
-          <div class="card-note">From showroom handover to first drive.</div>
+          <div class="card-cat">Automotive</div>
+          <div class="card-title">Automotive Films</div>
+          <div class="card-note">Delivery days, rolling shots and car cinematics.</div>
           <span class="card-link">Watch the film</span>
         </div>
       </a>
-      <a class="card reveal" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
-        <img src="photos/work-3.jpg" alt="Pre-wedding film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-3.jpg</div>'">
-        <div class="card-body">
-          <div class="card-cat">Pre-Wedding</div>
-          <div class="card-title">Pre-Wedding Stories</div>
-          <div class="card-note">Concept-driven couple films.</div>
-          <span class="card-link">Watch the film</span>
-        </div>
-      </a>
-      <a class="card reveal" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
-        <img src="photos/work-4.jpg" alt="Commercial film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-4.jpg</div>'">
+      <a class="card" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
+        <img src="photos/work-3.jpg" alt="Commercial film still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-3.jpg</div>'">
         <div class="card-body">
           <div class="card-cat">Commercial</div>
-          <div class="card-title">Brand Films</div>
-          <div class="card-note">Product, fashion and lifestyle reels.</div>
+          <div class="card-title">Brand Commercials</div>
+          <div class="card-note">Ad films and product reels that sell the story.</div>
+          <span class="card-link">Watch the film</span>
+        </div>
+      </a>
+      <a class="card" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
+        <img src="photos/work-4.jpg" alt="Influencer and UGC content still" onerror="this.outerHTML='<div class=\'fallback\'>Add photos/work-4.jpg</div>'">
+        <div class="card-body">
+          <div class="card-cat">Influencer &amp; UGC</div>
+          <div class="card-title">Creator Content</div>
+          <div class="card-note">Influencer shoots and UGC that feels native, not staged.</div>
           <span class="card-link">Watch the film</span>
         </div>
       </a>
@@ -245,27 +352,35 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
   </div>
 </section>
 
-<section id="photos">
+<!-- STILLS: parallax columns -->
+<section class="stills" id="photos">
   <div class="wrap">
     <div class="section-head">
       <h2>Stills.</h2>
       <p>Moments, paused.</p>
     </div>
-    <div class="gallery">
-      <figure class="reveal"><img src="photos/photo-1.jpg" alt="Portfolio photo 1" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-1.jpg</div>'"></figure>
-      <figure class="reveal"><img src="photos/photo-2.jpg" alt="Portfolio photo 2" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-2.jpg</div>'"></figure>
-      <figure class="reveal"><img src="photos/photo-3.jpg" alt="Portfolio photo 3" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-3.jpg</div>'"></figure>
-      <figure class="reveal"><img src="photos/photo-4.jpg" alt="Portfolio photo 4" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-4.jpg</div>'"></figure>
-      <figure class="reveal"><img src="photos/photo-5.jpg" alt="Portfolio photo 5" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-5.jpg</div>'"></figure>
-      <figure class="reveal"><img src="photos/photo-6.jpg" alt="Portfolio photo 6" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-6.jpg</div>'"></figure>
-      <figure class="reveal"><img src="photos/photo-7.jpg" alt="Portfolio photo 7" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-7.jpg</div>'"></figure>
-      <figure class="reveal"><img src="photos/photo-8.jpg" alt="Portfolio photo 8" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-8.jpg</div>'"></figure>
-      <figure class="reveal"><img src="photos/photo-9.jpg" alt="Portfolio photo 9" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-9.jpg</div>'"></figure>
+    <div class="plx-grid" id="plxGrid">
+      <div class="plx-col" data-speed="-0.06">
+        <figure class="reveal"><img src="photos/photo-1.jpg" alt="Portfolio photo 1" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-1.jpg</div>'"></figure>
+        <figure class="reveal"><img src="photos/photo-4.jpg" alt="Portfolio photo 4" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-4.jpg</div>'"></figure>
+        <figure class="reveal"><img src="photos/photo-7.jpg" alt="Portfolio photo 7" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-7.jpg</div>'"></figure>
+      </div>
+      <div class="plx-col" data-speed="0.05">
+        <figure class="reveal"><img src="photos/photo-2.jpg" alt="Portfolio photo 2" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-2.jpg</div>'"></figure>
+        <figure class="reveal"><img src="photos/photo-5.jpg" alt="Portfolio photo 5" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:1/1\'>Add photos/photo-5.jpg</div>'"></figure>
+        <figure class="reveal"><img src="photos/photo-8.jpg" alt="Portfolio photo 8" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:3/4\'>Add photos/photo-8.jpg</div>'"></figure>
+      </div>
+      <div class="plx-col" data-speed="-0.04">
+        <figure class="reveal"><img src="photos/photo-3.jpg" alt="Portfolio photo 3" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-3.jpg</div>'"></figure>
+        <figure class="reveal"><img src="photos/photo-6.jpg" alt="Portfolio photo 6" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-6.jpg</div>'"></figure>
+        <figure class="reveal"><img src="photos/photo-9.jpg" alt="Portfolio photo 9" onerror="this.outerHTML='<div class=\'ph\' style=\'aspect-ratio:4/5\'>Add photos/photo-9.jpg</div>'"></figure>
+      </div>
     </div>
-    <p class="gallery-note">Add images to a <code>photos/</code> folder named <code>photo-1.jpg</code> to <code>photo-9.jpg</code>. They appear here automatically.</p>
+    <p class="gallery-note">Add images to <code>photos/</code> named <code>photo-1.jpg</code> to <code>photo-9.jpg</code>. They appear here automatically.</p>
   </div>
 </section>
 
+<!-- GEAR -->
 <section class="pro">
   <div class="wrap">
     <div class="section-head">
@@ -283,34 +398,43 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
   </div>
 </section>
 
+<!-- STORY -->
 <section id="story">
-  <div class="wrap story">
+  <div class="story">
     <div class="section-head"><h2>The story.</h2></div>
-    <p>Four years as a software engineer at <strong>TCS</strong>. Code by day, weddings on weekends. Eventually, the camera won.</p>
-    <p>Today I run <strong>WedFilmers</strong>, a wedding films studio in Delhi — and document the journey of an engineer turned filmmaker. DIY grading rigs, automated edit pipelines, and the craft behind every frame.</p>
-    <p><strong>The engineering never left. It just changed lenses.</strong></p>
+    <p class="reveal">Four years as a software engineer at <strong>TCS</strong>. Code by day, weddings on weekends. Eventually, the camera won.</p>
+    <p class="reveal">Today I run <strong>WedFilmers</strong>, a wedding films studio in Delhi — and document the journey of an engineer turned filmmaker. DIY grading rigs, automated edit pipelines, and the craft behind every frame.</p>
+    <p class="reveal"><strong>The engineering never left. It just changed lenses.</strong></p>
   </div>
 </section>
 
-<section class="bg-alt" id="services">
+<!-- SERVICES -->
+<section class="services" id="services">
   <div class="wrap">
     <div class="section-head">
       <h2>What I shoot.</h2>
       <p>From shaadi to showroom.</p>
     </div>
     <div class="svc-grid">
-      <div class="svc reveal"><h3>Weddings</h3><p>Candid photography, cinematic films, pre-weddings and same-day edits via WedFilmers.</p></div>
-      <div class="svc reveal"><h3>Car Deliveries</h3><p>Cinematic delivery-day films for new car owners across Delhi NCR.</p></div>
-      <div class="svc reveal"><h3>Brands</h3><p>Reels and ad films for camera, automotive, fashion, fitness and grooming brands.</p></div>
-      <div class="svc reveal"><h3>Events</h3><p>Corporate events, parties, and anything that needs a cinematic eye.</p></div>
+      <div class="svc reveal"><h3>Wedding Films</h3><p>Candid photography, cinematic films, pre-weddings and same-day edits via WedFilmers.</p></div>
+      <div class="svc reveal"><h3>Automotive Shoots</h3><p>Delivery-day films, rolling shots and cinematic car content across Delhi NCR.</p></div>
+      <div class="svc reveal"><h3>Commercials</h3><p>Ad films and product reels for camera, automotive, fashion, fitness and grooming brands.</p></div>
+      <div class="svc reveal"><h3>Influencer &amp; UGC</h3><p>Creator shoots and UGC content that performs — native to the feed, built to convert.</p></div>
     </div>
   </div>
 </section>
 
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span class="fill">Let's collaborate</span><span>Delhi NCR</span><span class="fill">Let's collaborate</span><span>Delhi NCR</span><span class="fill">Let's collaborate</span><span>Delhi NCR</span><span class="fill">Let's collaborate</span><span>Delhi NCR</span>
+  </div>
+</div>
+
+<!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="wrap">
     <h2>Let's shoot something.</h2>
-    <p>Collaborations, weddings, brand work — or just to talk cameras.</p>
+    <p>Open to collaborations — weddings, automotive, brands, creators. Or just to talk cameras.</p>
     <div class="cta-row">
       <a class="btn btn-solid" href="mailto:pankaj@btechwalafilmmaker.com">Email me</a>
       <a class="btn btn-ghost" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">Instagram</a>
@@ -324,10 +448,134 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
 </footer>
 
 <script>
-const obs = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+(function(){
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Reveal on scroll */
+  const obs = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  /* ---------- Preloader (must run even with reduced motion) ---------- */
+  const loader = document.getElementById('loader');
+  function hideLoader(){ loader.classList.add('done'); }
+  if(document.readyState === 'complete') setTimeout(hideLoader, 500);
+  else addEventListener('load', ()=>setTimeout(hideLoader, 500));
+  setTimeout(hideLoader, 3000); /* never trap the user if an image stalls */
+
+  if(reduced) return;
+
+  /* Split statement into words */
+  const st = document.querySelector('#statement p');
+  st.innerHTML = st.textContent.trim().split(/\s+/)
+    .map(w=>'<span class="w">'+w+'</span>').join(' ');
+  const words = st.querySelectorAll('.w');
+
+  /* Size the horizontal work section: tall enough to scrub through the track */
+  const workOuter = document.querySelector('.work-outer');
+  const track = document.getElementById('workTrack');
+  function sizeWork(){
+    const dist = track.scrollWidth - innerWidth;
+    workOuter.style.height = (innerHeight + Math.max(dist,0)) + 'px';
+  }
+  sizeWork();
+  addEventListener('resize', sizeWork);
+
+  const heroPin = document.getElementById('heroPin');
+  const hero = document.querySelector('.hero');
+  const cols = document.querySelectorAll('.plx-col');
+  const grid = document.getElementById('plxGrid');
+
+  let ticking = false;
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(()=>{
+      const y = scrollY;
+
+      /* Hero: scale down + fade as it pins */
+      const hp = Math.min(Math.max(y/(hero.offsetHeight - innerHeight),0),1);
+      heroPin.style.opacity = 1 - hp*1.1;
+      heroPin.style.transform = 'scale(' + (1 - hp*.12) + ')';
+
+      /* Statement: light words up by progress through the block */
+      const r = st.getBoundingClientRect();
+      const sp = Math.min(Math.max((innerHeight*.8 - r.top)/(innerHeight*.7),0),1);
+      const lit = Math.floor(sp*words.length);
+      words.forEach((w,i)=>w.classList.toggle('lit', i<lit));
+
+      /* Work: translate track horizontally while pinned */
+      const wr = workOuter.getBoundingClientRect();
+      const dist = track.scrollWidth - innerWidth;
+      if(dist>0){
+        const wp = Math.min(Math.max(-wr.top/(wr.height - innerHeight),0),1);
+        track.style.transform = 'translateX(' + (-wp*dist) + 'px)';
+      }
+
+      /* Stills: parallax drift per column */
+      const gr = grid.getBoundingClientRect();
+      const center = gr.top + gr.height/2 - innerHeight/2;
+      cols.forEach(c=>{
+        c.style.transform = 'translateY(' + (center * parseFloat(c.dataset.speed)) + 'px)';
+      });
+
+      ticking = false;
+    });
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- Custom cursor + magnetic buttons (desktop only) ---------- */
+  if(matchMedia('(pointer:fine)').matches){
+    document.body.classList.add('has-cursor');
+    const dot = document.getElementById('cdot');
+    const ring = document.getElementById('cring');
+    let mx=-100,my=-100,rx=-100,ry=-100;
+    addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function cur(){
+      rx += (mx-rx)*.18; ry += (my-ry)*.18;
+      dot.style.transform = 'translate('+(mx-3.5)+'px,'+(my-3.5)+'px)';
+      ring.style.transform = 'translate('+(rx-ring.offsetWidth/2)+'px,'+(ry-ring.offsetHeight/2)+'px)';
+      requestAnimationFrame(cur);
+    })();
+    document.querySelectorAll('a,.btn').forEach(el=>{
+      el.addEventListener('mouseenter',()=>ring.classList.add('hot'));
+      el.addEventListener('mouseleave',()=>ring.classList.remove('hot'));
+    });
+    /* magnetic pull on buttons */
+    document.querySelectorAll('.btn').forEach(btn=>{
+      btn.addEventListener('mousemove',e=>{
+        const r = btn.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width/2);
+        const dy = e.clientY - (r.top + r.height/2);
+        btn.style.transform = 'translate('+dx*.25+'px,'+dy*.25+'px)';
+      });
+      btn.addEventListener('mouseleave',()=>{
+        btn.style.transition='transform .35s cubic-bezier(.2,.6,.2,1)';
+        btn.style.transform='';
+        setTimeout(()=>btn.style.transition='',350);
+      });
+    });
+
+    /* ---------- Smooth inertia scrolling (wheel only) ---------- */
+    let target = scrollY, eased = scrollY, smoothing = false;
+    addEventListener('wheel', e=>{
+      e.preventDefault();
+      target = Math.max(0, Math.min(target + e.deltaY,
+        document.documentElement.scrollHeight - innerHeight));
+      if(!smoothing){ smoothing = true; eased = scrollY; smooth(); }
+    }, {passive:false});
+    function smooth(){
+      eased += (target - eased)*.1;
+      if(Math.abs(target - eased) < .5){ scrollTo(0, target); smoothing = false; return; }
+      scrollTo(0, eased);
+      requestAnimationFrame(smooth);
+    }
+    /* keep target in sync when scrolling by keyboard/anchor */
+    addEventListener('scroll', ()=>{ if(!smoothing) target = scrollY; }, {passive:true});
+  }
+})();
 </script>
 
 </body>
