@@ -211,17 +211,20 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:4
 .reels-note code{background:#1c1c1e;padding:2px 7px;border-radius:6px;font-size:.8rem}
 
 .reel-feed{position:relative}
-.reel-exit{display:none}
+.reel-exit,.reel-fs{display:none}
 
 /* Phones: full-screen vertical snap feed, exactly like Instagram */
 @media (hover:none) and (max-width:760px){
-  .reel-exit{
+  .reel-exit,.reel-fs{
     display:flex;align-items:center;justify-content:center;
-    position:absolute;top:16px;right:16px;z-index:20;
+    position:absolute;right:16px;z-index:20;
     width:40px;height:40px;border-radius:50%;border:none;
     background:rgba(0,0,0,.55);backdrop-filter:blur(8px);
     color:#fff;font-size:1.05rem;line-height:1;
   }
+  .reel-exit{top:16px}
+  .reel-fs{top:66px;font-size:1.2rem}
+  .reel .snd{left:14px;right:auto}  /* sound badge moves left, away from the buttons */
   .reel-row{
     flex-direction:column;
     overflow-y:auto;overflow-x:hidden;
@@ -508,6 +511,7 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
   </div>
   <div class="reel-feed">
   <button class="reel-exit" id="reelExit" aria-label="Exit reels">✕</button>
+  <button class="reel-fs" id="reelFs" aria-label="Fullscreen">⛶</button>
   <div class="reel-row" id="reelRow">
     <div class="reel" data-src="reels/reel-1.mp4"></div>
     <div class="reel" data-src="reels/reel-2.mp4"></div>
@@ -672,6 +676,25 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
   /* mobile: ✕ exits the reels feed and continues down the page */
   document.getElementById('reelExit').addEventListener('click', ()=>{
     document.querySelector('.pro').scrollIntoView({behavior:'smooth'});
+  });
+
+  /* mobile: ⛶ opens the reel currently in front in fullscreen */
+  document.getElementById('reelFs').addEventListener('click', ()=>{
+    const row = document.getElementById('reelRow');
+    const mid = row.getBoundingClientRect();
+    const midY = mid.top + mid.height/2;
+    let best = null, bd = Infinity;
+    reels.forEach(r=>{
+      if(!r.isConnected) return;
+      const rr = r.getBoundingClientRect();
+      const d = Math.abs(rr.top + rr.height/2 - midY);
+      if(d < bd){ bd = d; best = r; }
+    });
+    const v = best && best.querySelector('video');
+    if(!v) return;
+    if(v.webkitEnterFullscreen) v.webkitEnterFullscreen();      /* iPhone Safari */
+    else if(v.requestFullscreen) v.requestFullscreen();
+    else if(v.webkitRequestFullscreen) v.webkitRequestFullscreen();
   });
 
   /* ---------- Work-card videos: play only while visible ---------- */
