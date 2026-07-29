@@ -372,6 +372,18 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
   display:none;text-align:center;color:var(--gray);
   font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-top:16px;
 }
+.yt-row{
+  display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
+  margin-top:26px;padding:0 22px;
+}
+.yt-label{color:var(--gray);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-right:6px}
+.yt-chip{
+  padding:8px 18px;border-radius:980px;
+  border:1px solid rgba(255,255,255,.22);
+  color:var(--ink);font-size:.88rem;
+  transition:border-color .2s,background .2s;
+}
+.yt-chip:hover{border-color:#f00;background:rgba(255,0,0,.08);text-decoration:none}
 @media (hover:none), (pointer:coarse){
   .work-outer{height:auto !important;padding:10vh 0}
   .work-track-wrap{position:static;height:auto;overflow:visible;display:block}
@@ -462,7 +474,7 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
       <p>Every frame, intentional.</p>
     </div>
     <div class="work-track" id="workTrack">
-      <a class="card" href="https://instagram.com/btechwalafilmmaker" target="_blank" rel="noopener">
+      <a class="card" href="https://www.youtube.com/playlist?list=PL7-klfDwdzzTVkKBaresTjTWN2OS1g-Hx" target="_blank" rel="noopener">
         <video class="card-vid" src="bg/card-1.mp4" poster="photos/work-1.jpg" muted loop playsinline preload="metadata" aria-label="Wedding film preview"></video>
         <div class="card-body">
           <div class="card-cat">Wedding Film</div>
@@ -500,6 +512,13 @@ footer p{text-align:center;color:var(--gray);font-size:.78rem}
       </a>
     </div>
     <div class="swipe-hint">‹ Swipe ›</div>
+    <div class="yt-row">
+      <span class="yt-label">▶ Watch on YouTube</span>
+      <a class="yt-chip" href="https://www.youtube.com/playlist?list=PL7-klfDwdzzTVkKBaresTjTWN2OS1g-Hx" target="_blank" rel="noopener">Weddings</a>
+      <a class="yt-chip" href="https://www.youtube.com/playlist?list=PL7-klfDwdzzQlFMbCa43qwyFLeFMlMNbo" target="_blank" rel="noopener">Pre-Weddings</a>
+      <a class="yt-chip" href="https://www.youtube.com/playlist?list=PLn58Dm04-ep5tyVOz7sGwELYfzyQHyHNC" target="_blank" rel="noopener">Music Videos</a>
+      <a class="yt-chip" href="https://www.youtube.com/playlist?list=PLn58Dm04-ep5zPsHs3yIQeJGpGUnG9KMx" target="_blank" rel="noopener">Documentaries</a>
+    </div>
   </div>
 </section>
 
